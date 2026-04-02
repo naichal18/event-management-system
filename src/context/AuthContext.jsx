@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = 'http://localhost:5001/api';
+  const API_BASE = 'https://event-backend-qaub.onrender.com';
 
   useEffect(() => {
     if (token) {
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
-    
+
     if (res.ok) {
       const data = await res.json();
       setToken(data.token);
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
   const updateProfile = async (updatedData) => {
     const res = await fetch(`${API_BASE}/user/update`, {
       method: 'PUT',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
