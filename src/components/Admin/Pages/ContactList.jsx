@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 const ContactList = () => {
   const { contacts, fetchContacts } = useOutletContext();
+
+  useEffect(() => {
+    console.log("ContactList page mounted. Re-fetching messages...");
+    fetchContacts();
+  }, []); // MANDATORY DEBUG STEP 7 - FETCH ON MOUNT
 
   const formatDate = (dateStr) => {
     if (!dateStr) return 'N/A';
