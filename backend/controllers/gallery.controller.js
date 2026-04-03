@@ -11,13 +11,13 @@ const getGalleryItems = async (req, res) => {
 
 const createGalleryItem = async (req, res) => {
     try {
-        const { imageUrl, title, description } = req.body;
+        const { imageUrl, title, description, timeline } = req.body;
         
         if (!imageUrl || !title || !description) {
             return res.status(400).json({ message: 'Please provide all fields' });
         }
 
-        const item = await Gallery.create({ imageUrl, title, description });
+        const item = await Gallery.create({ imageUrl, title, description, timeline: timeline || [] });
         res.status(201).json(item);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });

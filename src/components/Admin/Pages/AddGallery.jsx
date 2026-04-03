@@ -6,7 +6,21 @@ const AddGallery = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [timelineSteps, setTimelineSteps] = useState([]);
+  const [newTime, setNewTime] = useState('');
+  const [newActivity, setNewActivity] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const addStep = () => {
+    if (!newTime || !newActivity) return;
+    setTimelineSteps([...timelineSteps, { time: newTime, activity: newActivity }]);
+    setNewTime('');
+    setNewActivity('');
+  };
+
+  const removeStep = (index) => {
+    setTimelineSteps(timelineSteps.filter((_, i) => i !== index));
+  };
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -22,13 +36,14 @@ const AddGallery = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ title, description, imageUrl })
+        body: JSON.stringify({ title, description, imageUrl, timeline: timelineSteps })
       });
 
       if (res.ok) {
         setTitle('');
         setDescription('');
         setImageUrl('');
+        setTimelineSteps([]);
         fetchGallery();
         alert('Image added to gallery!');
       } else {
@@ -85,6 +100,42 @@ const AddGallery = () => {
           <label className="glass-label">Description</label>
           <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="glass-input" required />
         </div>
+
+        {/* Timeline Section */}
+        <div className="form-full" style={{ background: 'rgba(255,255,255,0.03)', padding: '20px', borderRadius: '12px', marginTop: '10px' }}>
+          <h5 style={{ margin: '0 0 15px 0', color: '#0df' }}>Add Gallery Timeline (Optional)</h5>
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+            <input 
+              type="text" 
+              placeholder="Time (e.g. 6:00 PM)" 
+              value={newTime} 
+              onChange={e => setNewTime(e.target.value)} 
+              className="glass-input" 
+              style={{ flex: 1 }}
+            />
+            <input 
+              type="text" 
+              placeholder="Activity (e.g. Entry Started)" 
+              value={newActivity} 
+              onChange={e => setNewActivity(e.target.value)} 
+              className="glass-input" 
+              style={{ flex: 2 }}
+            />
+            <button type="button" onClick={addStep} className="gradient-btn" style={{ padding: '0 20px', width: 'auto' }}> Add Step</button>
+          </div>
+
+          {timelineSteps.length > 0 && (
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {timelineSteps.map((step, idx) => (
+                <li key={idx} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', fontSize: '13px', color: '#94a3b8' }}>
+                  <span>{step.time} – {step.activity}</span>
+                  <button type="button" onClick={() => removeStep(idx)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}>✕</button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
         <div className="form-full">
           <button type="submit" className="gradient-btn" disabled={loading}>
             {loading ? 'Uploading...' : 'Add to Gallery'}

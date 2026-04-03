@@ -82,8 +82,22 @@ const Gallery = () => {
                 <h3 style={{ color: '#fff', fontWeight: 700, fontSize: '1.2rem', marginBottom: '4px', letterSpacing: '0.5px' }}>
                   {item.title}
                 </h3>
-                <p style={{ color: '#94a3b8', fontSize: '12px', marginBottom: '4px' }}>{item.description}</p>
-                <p style={{ color: '#0df', fontSize: '11px', fontWeight: 600, letterSpacing: '1px' }}>
+                <p style={{ color: '#cbd5e1', fontSize: '12px', marginBottom: '8px', lineHeight: '1.4' }}>{item.description}</p>
+                
+                {item.timeline && item.timeline.length > 0 && (
+                  <div style={{ marginBottom: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '8px' }}>
+                    <p style={{ color: '#0df', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '5px' }}>🕒 Timeline</p>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: '11px', color: '#94a3b8' }}>
+                      {item.timeline.map((step, idx) => (
+                        <li key={idx} style={{ marginBottom: '2px' }}>
+                          • <span style={{ color: '#fff', fontWeight: 600 }}>{step.time}</span> – {step.activity}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <p style={{ color: '#64748b', fontSize: '10px', fontWeight: 600, letterSpacing: '1px' }}>
                   {new Date(item.timestamp).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
                 </p>
               </div>

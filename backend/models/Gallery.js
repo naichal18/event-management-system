@@ -18,7 +18,13 @@ const gallerySchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now
-    }
+    },
+    timeline: [
+        {
+            time: String,
+            activity: String
+        }
+    ]
 }, {
     timestamps: true
 });
