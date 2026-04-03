@@ -72,9 +72,16 @@ const AdminDashboard = () => {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch(`${API_BASE}/contact`, { headers: authHeaders });
-      if (res.ok) setContacts(await res.json());
-    } catch (e) { console.error('Failed to fetch contacts', e); }
+      const res = await fetch(`${API_BASE}/messages`, { headers: authHeaders });
+      console.log("Admin messages fetch response (Step 7):", res); // MANDATORY DEBUG STEP 7
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Admin messages list (Step 7):", data); // MANDATORY DEBUG STEP 7
+        setContacts(data);
+      }
+    } catch (e) {
+      console.error('Failed to fetch messages (Step 7):', e);
+    }
   };
 
   const contextValue = {

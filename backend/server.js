@@ -11,6 +11,7 @@ const eventRoutes = require('./routes/event.routes');
 const contactRoutes = require('./routes/contact.routes');
 const categoryRoutes = require('./routes/category.routes');
 const galleryRoutes = require('./routes/gallery.routes');
+const messageRoutes = require('./routes/message.routes');
 
 // Load env vars
 dotenv.config();
@@ -36,6 +37,7 @@ const startServer = async () => {
         app.use('/api/contact', contactRoutes);
         app.use('/api/categories', categoryRoutes);
         app.use('/api/gallery', galleryRoutes);
+        app.use('/api/messages', messageRoutes);
 
         // Health check
         app.get('/api/health', (req, res) => res.json({ status: 'up' }));

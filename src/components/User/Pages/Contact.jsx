@@ -59,19 +59,33 @@ const Contact = () => {
       return;
     }
 
-    const message = {
-      ...form,
-      date: new Date().toLocaleString(),
-    };
-
-    const existing = JSON.parse(localStorage.getItem('contactMessages') || '[]');
-    existing.push(message);
-    localStorage.setItem('contactMessages', JSON.stringify(existing));
-
-    setSuccess(true);
-    setForm({ name: '', email: '', phone: '', message: '' });
-    setErrors({});
-    setTimeout(() => setSuccess(false), 5000);
+    const API_BASE = 'https://event-management-system-5wx4.onrender.com/api'; // Verify API_BASE (Step 2)
+    
+    console.log("Sending message (Step 1):", form); // MANDATORY DEBUG STEP 1 
+    
+    fetch(`${API_BASE}/messages`, { 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    })
+    .then(async res => {
+      console.log("Response (Step 3):", res); // MANDATORY DEBUG STEP 3
+      if (res.ok) {
+        console.log("SUCCESS: Message submitted to DB."); 
+        setSuccess(true);
+        setForm({ name: '', email: '', phone: '', message: '' });
+        setErrors({});
+        setTimeout(() => setSuccess(false), 5000);
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        console.error('SERVER ERROR (Step 3):', res.status, errData);
+      }
+    })
+    .catch(err => {
+      console.error('NETWORK ERROR (Step 3):', err); // MANDATORY DEBUG STEP 3
+    });
   };
 
   const getInputStyle = (field) => ({
