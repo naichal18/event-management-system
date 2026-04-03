@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-
-let mongod = null;
 
 const connectDB = async () => {
     try {
-        console.log('Starting In-Memory MongoDB (Reliable Local Mode)...');
-        
-        mongod = await MongoMemoryServer.create();
-        const dbUrl = mongod.getUri();
+        // Prefer MongoDB Atlas URI from environment if available
+        if (process.env.MONGO_URI) {
+            console.log('Connecting to MongoDB Atlas...');
+            const conn = await mongoose.connect(process.env.MONGO_URI);
+            console.log(`MongoDB Atlas Connected: ${conn.connection.host}`);
+            return conn;
+        }
 
+        // Fallback: In-Memory MongoDB for local development
+        console.log('No MONGO_URI found — starting In-Memory MongoDB (data resets on restart)...');
+        const { MongoMemoryServer } = require('mongodb-memory-server');
+        const mongod = await MongoMemoryServer.create();
+        const dbUrl = mongod.getUri();
         const conn = await mongoose.connect(dbUrl);
         console.log(`MongoDB Connected: In-Memory DB @ ${conn.connection.host}`);
-        
         return conn;
+
     } catch (error) {
-        console.error(`In-Memory MongoDB Error: ${error.message}`);
+        console.error(`Database Connection Error: ${error.message}`);
         process.exit(1);
     }
 };

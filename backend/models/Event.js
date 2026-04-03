@@ -24,6 +24,14 @@ const eventSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    time: {
+        type: String,
+        default: '7:00 PM'
+    },
+    description: {
+        type: String,
+        default: ''
     }
 }, {
     timestamps: true

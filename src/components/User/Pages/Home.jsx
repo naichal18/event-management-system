@@ -62,8 +62,8 @@ const Home = () => {
                   </div>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '15px' }}>{event.title}</h3>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>₹{event.price}</span>
-                    <button className="user-gradient-btn" onClick={() => navigate(`/user/event/${event._id}`)} style={{ padding: '8px 20px', borderRadius: '10px', fontSize: '14px' }}>Book Now</button>
+                    <span style={{ background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.4)', color: '#93c5fd', padding: '4px 10px', borderRadius: '12px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: '4px' }}>⭐ Limited Seats</span>
+                    <button className="user-gradient-btn" onClick={() => navigate(`/user/event/${event._id}`)} style={{ padding: '8px 20px', borderRadius: '10px', fontSize: '14px' }}>View Details</button>
                   </div>
                 </div>
               </div>

@@ -8,8 +8,9 @@ const autoSeed = require('./config/seeder');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const eventRoutes = require('./routes/event.routes');
-const bookingRoutes = require('./routes/booking.routes');
 const contactRoutes = require('./routes/contact.routes');
+const categoryRoutes = require('./routes/category.routes');
+const galleryRoutes = require('./routes/gallery.routes');
 
 // Load env vars
 dotenv.config();
@@ -32,8 +33,9 @@ const startServer = async () => {
         app.use('/api/auth', authRoutes);
         app.use('/api/user', userRoutes);
         app.use('/api/events', eventRoutes);
-        app.use('/api/bookings', bookingRoutes);
         app.use('/api/contact', contactRoutes);
+        app.use('/api/categories', categoryRoutes);
+        app.use('/api/gallery', galleryRoutes);
 
         // Health check
         app.get('/api/health', (req, res) => res.json({ status: 'up' }));

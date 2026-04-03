@@ -1,27 +1,56 @@
 import React, { useState } from 'react';
-
 import { useOutletContext } from 'react-router-dom';
 
 const PostCategory = () => {
-  const { categories, setCategories } = useOutletContext();
+  const { categories, fetchCategories, token, API_BASE } = useOutletContext();
   const [name, setName] = useState('');
-  const [imageFile, setImageFile] = useState(null);
+  const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleAdd = (e) => {
+  const handleAdd = async (e) => {
     e.preventDefault();
-    if (!name) return;
-    const newCat = {
-      id: Date.now(),
-      image: imageFile ? URL.createObjectURL(imageFile) : 'https://via.placeholder.com/100?text=No+Img',
-      name
-    };
-    setCategories([...categories, newCat]);
-    setName('');
-    setImageFile(null);
+    if (!name || !description) return;
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/categories`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ name, description })
+      });
+
+      if (res.ok) {
+        setName('');
+        setDescription('');
+        fetchCategories();
+      } else {
+        const err = await res.json();
+        alert(err.message || 'Failed to add category');
+      }
+    } catch (e) {
+      alert('Server error');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDelete = (id) => {
-    setCategories(categories.filter(c => c.id !== id));
+  const handleDelete = async (id) => {
+    if (!window.confirm('Delete this category?')) return;
+    try {
+      const res = await fetch(`${API_BASE}/categories/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        fetchCategories();
+      } else {
+        alert('Failed to delete category');
+      }
+    } catch (e) {
+      alert('Server error');
+    }
   };
 
   return (
@@ -32,14 +61,16 @@ const PostCategory = () => {
         </div>
         <form onSubmit={handleAdd}>
           <div className="form-group" style={{ marginBottom: '15px' }}>
-            <label className="glass-label">Category Image</label>
-            <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} className="glass-input" />
-          </div>
-          <div className="form-group" style={{ marginBottom: '20px' }}>
             <label className="glass-label">Category Name</label>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="glass-input" required />
           </div>
-          <button type="submit" className="gradient-btn" style={{ width: '100%' }}>Add</button>
+          <div className="form-group" style={{ marginBottom: '20px' }}>
+            <label className="glass-label">Description</label>
+            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="glass-input" required />
+          </div>
+          <button type="submit" className="gradient-btn" style={{ width: '100%' }} disabled={loading}>
+            {loading ? 'Adding...' : 'Add'}
+          </button>
         </form>
       </div>
 
@@ -52,19 +83,19 @@ const PostCategory = () => {
             <thead>
               <tr>
                 <th>No</th>
-                <th>Image</th>
                 <th>Name</th>
+                <th>Description</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {categories.map((cat, idx) => (
-                <tr key={cat.id}>
+                <tr key={cat._id}>
                   <td>{idx + 1}</td>
-                  <td><img src={cat.image} alt={cat.name} style={{width: '50px', height: '50px', borderRadius: '8px', objectFit: 'cover'}} /></td>
                   <td>{cat.name}</td>
+                  <td>{cat.description}</td>
                   <td>
-                    <button className="gradient-btn gradient-btn-danger" onClick={() => handleDelete(cat.id)} style={{ padding: '6px 12px', fontSize: '12px' }}>Delete</button>
+                    <button className="gradient-btn gradient-btn-danger" onClick={() => handleDelete(cat._id)} style={{ padding: '6px 12px', fontSize: '12px' }}>Delete</button>
                   </td>
                 </tr>
               ))}

@@ -6,11 +6,13 @@ const Events = () => {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [categories, setCategories] = useState(['All']);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         fetchEvents();
+        fetchCategories();
     }, []);
 
     const fetchEvents = async () => {
@@ -27,7 +29,17 @@ const Events = () => {
         }
     };
 
-    const categories = ['All', 'Cricket', 'Concert', 'Festival', 'Cultural', 'Party'];
+    const fetchCategories = async () => {
+        try {
+            const res = await fetch('https://event-management-system-5wx4.onrender.com/api/categories');
+            if (res.ok) {
+                const data = await res.json();
+                setCategories(['All', ...data.map(c => c.name)]);
+            }
+        } catch (e) {
+            console.error('Failed to fetch categories:', e);
+        }
+    };
 
     const filteredEvents = events.filter(event => {
         const matchesCategory = selectedCategory === 'All' || event.category === selectedCategory;
@@ -110,8 +122,8 @@ const Events = () => {
                                             <p>📅 {event.date}</p>
                                         </div>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '20px' }}>
-                                            <span style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0df' }}>₹{event.price.toLocaleString()}</span>
-                                            <button className="user-gradient-btn" onClick={() => navigate(`/user/event/${event._id}`)} style={{ padding: '9px 22px', borderRadius: '10px', fontSize: '14px', fontWeight: 600 }}>Book Tickets</button>
+                                            <span style={{ background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.4)', color: '#93c5fd', padding: '5px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: '5px' }}>⭐ Limited Seats</span>
+                                            <button className="user-gradient-btn" onClick={() => navigate(`/user/event/${event._id}`)} style={{ padding: '9px 22px', borderRadius: '10px', fontSize: '14px', fontWeight: 600 }}>View Details</button>
                                         </div>
                                     </div>
                                 </div>

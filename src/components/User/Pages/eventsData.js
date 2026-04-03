@@ -2,7 +2,7 @@ export const eventsData = [
   {
     id: 1,
     title: 'INDIAN PREMIER LEAGUE',
-    price: 2499,
+
     date: '2025-05-15',
     time: '7:30 PM',
     location: 'Wankhede Stadium, Mumbai',
@@ -14,7 +14,7 @@ export const eventsData = [
   {
     id: 2,
     title: 'WOMEN PREMIER LEAGUE',
-    price: 599,
+
     date: '2025-04-20',
     time: '5:00 PM',
     location: 'M. Chinnaswamy Stadium, Bengaluru',
@@ -26,7 +26,7 @@ export const eventsData = [
   {
     id: 3,
     title: 'GLOBAL MUSIC CONCERT',
-    price: 200,
+
     date: '2025-06-01',
     time: '10:00 AM',
     location: 'Gokuldham Society Ground, Goregaon',

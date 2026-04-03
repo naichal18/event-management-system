@@ -18,7 +18,7 @@ import Home from './components/User/Pages/Home';
 import About from './components/User/Pages/About';
 import Events from './components/User/Pages/Events';
 import EventDetails from './components/User/Pages/EventDetails';
-import MyBookings from './components/User/Pages/MyBookings';
+import CreateEvent from './components/User/Pages/CreateEvent';
 import Gallery from './components/User/Pages/Gallery';
 import GalleryHighlight from './components/User/Pages/GalleryHighlight';
 import Contact from './components/User/Pages/Contact';
@@ -81,7 +81,7 @@ function App() {
                 <Route path="about" element={<About />} />
                 <Route path="events" element={<Events />} />
                 <Route path="event/:id" element={<EventDetails />} />
-                <Route path="mybooking" element={<MyBookings />} />
+                <Route path="create-event" element={<CreateEvent />} />
                 <Route path="gallery" element={<Gallery />} />
                 <Route path="gallery/:eventName" element={<GalleryHighlight />} />
                 <Route path="contact" element={<Contact />} />

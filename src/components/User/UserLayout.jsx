@@ -42,14 +42,14 @@ const UserLayout = () => {
                     <li><Link to="/user/gallery" className="nav-btn">GALLERY</Link></li>
                     <li><Link to="/user/contact" className="nav-btn">CONTACT</Link></li>
                     <li>
-                        <Link to="/user/mybooking" className="nav-btn" style={{ 
+                        <Link to="/user/create-event" className="nav-btn" style={{ 
                             background: 'linear-gradient(135deg, #06b6d4, #3b82f6)', 
                             color: '#fff', 
                             padding: '8px 16px', 
                             borderRadius: '20px',
                             fontWeight: 'bold'
                         }}>
-                            MY BOOKINGS
+                            CREATE EVENT
                         </Link>
                     </li>
                 </ul>
@@ -87,7 +87,7 @@ const UserLayout = () => {
                                 <p style={{ color: '#94a3b8', fontSize: '12px', margin: 0 }}>{user?.email}</p>
                             </div>
                             <button onClick={() => { navigate('/user/account'); setDropdownOpen(false); }} className="dropdown-item">My Account</button>
-                            <button onClick={() => { navigate('/user/mybooking'); setDropdownOpen(false); }} className="dropdown-item">My Bookings</button>
+                            <button onClick={() => { navigate('/user/create-event'); setDropdownOpen(false); }} className="dropdown-item">Create Event</button>
                             <button onClick={() => { navigate('/user/change-password'); setDropdownOpen(false); }} className="dropdown-item">Change Password</button>
                             <div style={{ height: '1px', background: 'rgba(255, 255, 255, 0.1)', margin: '10px 0' }}></div>
                             <button onClick={handleLogout} className="dropdown-item" style={{ color: '#ff4d4d' }}>Logout</button>
