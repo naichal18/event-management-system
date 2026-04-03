@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
+import { useToast } from '../../../context/ToastContext';
 
 const UserChangePassword = () => {
     const { changePassword } = useAuth();
+    const { showToast } = useToast();
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        setMessage('');
 
         if (newPassword !== confirmPassword) {
-            setMessage('New passwords do not match');
+            showToast('New passwords do not match', 'error');
             return;
         }
 
         if (newPassword.length < 6) {
-            setMessage('New password must be at least 6 characters');
+            showToast('New password must be at least 6 characters', 'error');
             return;
         }
 
@@ -27,12 +27,12 @@ const UserChangePassword = () => {
         const result = await changePassword(currentPassword, newPassword);
         
         if (result.success) {
-            setMessage('Password updated successfully!');
+            showToast('Password updated successfully!', 'success');
             setCurrentPassword('');
             setNewPassword('');
             setConfirmPassword('');
         } else {
-            setMessage(result.message || 'Update failed');
+            showToast(result.message || 'Update failed', 'error');
         }
         setLoading(false);
     };
@@ -41,7 +41,6 @@ const UserChangePassword = () => {
         <div className="password-container">
             <div className="password-box glass-card">
                 <h2>Change Password</h2>
-                {message && <div className={`message ${message.includes('success') ? 'success' : 'error'}`}>{message}</div>}
                 
                 <form onSubmit={handleUpdate} className="password-form">
                     <div className="form-group">

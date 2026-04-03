@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../../context/AuthContext';
+import { useToast } from '../../../context/ToastContext';
 
 const ChangePassword = () => {
+  const { changePassword } = useAuth();
+  const { showToast } = useToast();
   const [passwords, setPasswords] = useState({ old: '', newPass: '', confirm: '' });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (passwords.newPass !== passwords.confirm) {
-      alert("New password and confirm password do not match!");
+      showToast("Passwords do not match!", 'error');
       return;
     }
     if (passwords.newPass.length < 6) {
-      alert("Password must be at least 6 characters.");
+      showToast("Password must be at least 6 characters", 'error');
       return;
     }
-    alert("Password successfully changed!");
-    setPasswords({ old: '', newPass: '', confirm: '' });
+
+    setLoading(true);
+    const result = await changePassword(passwords.old, passwords.newPass);
+    
+    if (result.success) {
+      showToast("Password successfully changed!", 'success');
+      setPasswords({ old: '', newPass: '', confirm: '' });
+    } else {
+      showToast(result.message || "Failed to change password", "error");
+    }
+    setLoading(false);
   };
 
   return (
@@ -54,7 +68,9 @@ const ChangePassword = () => {
             required 
           />
         </div>
-        <button type="submit" className="gradient-btn">Update Password</button>
+        <button type="submit" className="gradient-btn" disabled={loading}>
+          {loading ? 'Updating...' : 'Update Password'}
+        </button>
       </form>
     </div>
   );

@@ -1,42 +1,44 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
   const { login, register } = useAuth();
+  const { showToast } = useToast();
   
   const [isRegister, setIsRegister] = useState(false);
-  const [role, setRole] = useState('User'); // Only used for Login role check
+  const [role, setRole] = useState('User');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
 
     if (isRegister) {
       const result = await register({ name, email, password });
       if (result.success) {
+        showToast('Registration successful!', 'success');
         navigate('/user/home');
       } else {
-        setError(result.message || 'Registration failed');
+        showToast(result.message || 'Registration failed', 'error');
       }
     } else {
-      const result = await login(email, password, role);
-      if (result.success) {
-        if (role === 'Admin') {
+      const result = await login(email, password);
+      if (result.success && result.user) {
+        showToast(`Welcome back, ${result.user.name}!`, 'success');
+        if (result.user.role === 'Admin') {
           navigate('/admin');
         } else {
           navigate('/user/home');
         }
-      } else {
-        setError(result.message || 'Login failed');
+      } else if (!result.success) {
+        showToast(result.message || 'Login failed', 'error');
       }
     }
     setLoading(false);
@@ -55,8 +57,6 @@ const Login = () => {
         </div>
         
         <form onSubmit={handleSubmit} className="login-form">
-          {error && <div className="error-message" style={{ color: '#ff4d4d', marginBottom: '15px', textAlign: 'center', fontSize: '14px' }}>{error}</div>}
-
           {!isRegister && (
             <div className="form-group">
               <label>Login As</label>

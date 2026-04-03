@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
+import { useToast } from '../../../context/ToastContext';
 
 const EventDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { token } = useAuth();
+  const { showToast } = useToast();
   
   const [event, setEvent] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -32,7 +34,7 @@ const EventDetails = () => {
 
   const handleBooking = async () => {
     if (!paymentMethod) {
-      alert('Please select a payment method to continue.');
+      showToast('Please select a payment method', 'error');
       return;
     }
     
@@ -57,14 +59,14 @@ const EventDetails = () => {
       });
 
       if (res.ok) {
-        alert(`✅ Payment Successful via ${paymentMethod}! Ticket booked.`);
+        showToast('Booking successful!', 'success');
         navigate('/user/mybooking');
       } else {
         const error = await res.json();
-        alert(`❌ Booking failed: ${error.message}`);
+        showToast(error.message || 'Booking failed', 'error');
       }
     } catch (error) {
-      alert('❌ Server error during booking');
+      showToast('Server error during booking', 'error');
     } finally {
       setBookingLoading(false);
     }

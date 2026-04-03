@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
+import { useToast } from '../../../context/ToastContext';
 import { QRCodeSVG } from 'qrcode.react';
 
 const MyBookings = () => {
   const { token, user } = useAuth();
+  const { showToast } = useToast();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const API_BASE = 'http://localhost:5001/api';
+
   useEffect(() => {
-    fetchBookings();
-  }, []);
+    if (token) fetchBookings();
+  }, [token]);
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/bookings/user', {
+      const res = await fetch(`${API_BASE}/bookings/user`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -21,7 +25,7 @@ const MyBookings = () => {
         setBookings(data);
       }
     } catch (error) {
-      console.error('Failed to fetch bookings:', error);
+      showToast('Failed to fetch bookings', 'error');
     } finally {
       setLoading(false);
     }
@@ -31,19 +35,19 @@ const MyBookings = () => {
     if (!window.confirm('Are you sure you want to cancel this booking?')) return;
     
     try {
-      const res = await fetch(`http://localhost:5001/api/bookings/${id}`, {
+      const res = await fetch(`${API_BASE}/bookings/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
         setBookings(bookings.filter(b => b._id !== id));
-        alert('Booking cancelled successfully');
+        showToast('Booking cancelled successfully', 'success');
       } else {
         const data = await res.json();
-        alert(`Failed: ${data.message}`);
+        showToast(data.message || 'Cancellation failed', 'error');
       }
     } catch (error) {
-      alert('Server error during cancellation');
+      showToast('Server error during cancellation', 'error');
     }
   };
 

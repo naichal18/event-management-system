@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../../context/AuthContext';
+import { useToast } from '../../../context/ToastContext';
 
 const Profile = () => {
-  const { profile, setProfile } = useOutletContext();
-  const [formData, setFormData] = useState({ name: profile.name, email: profile.email });
-  const [preview, setPreview] = useState(profile.avatar);
+  const { user, updateProfile } = useAuth();
+  const { showToast } = useToast();
+  const [formData, setFormData] = useState({ name: user?.name || '', email: user?.email || '' });
+  const [preview, setPreview] = useState(user?.avatar || '');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setFormData({ name: user.name, email: user.email });
+      setPreview(user.avatar);
+    }
+  }, [user]);
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -13,15 +23,20 @@ const Profile = () => {
     }
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    setProfile({ 
-      ...profile, 
+    setLoading(true);
+    const result = await updateProfile({ 
       name: formData.name, 
-      email: formData.email,
-      avatar: preview // Updates global state and Topbar immediately
+      avatar: preview 
     });
-    alert('Profile updated successfully!');
+    
+    if (result.success) {
+      showToast('Profile updated successfully!', 'success');
+    } else {
+      showToast(result.message || 'Update failed', 'error');
+    }
+    setLoading(false);
   };
 
   return (
@@ -56,12 +71,14 @@ const Profile = () => {
           <input 
             type="email" 
             value={formData.email} 
-            onChange={(e) => setFormData({...formData, email: e.target.value})} 
+            disabled
             className="glass-input" 
-            required 
+            style={{ opacity: 0.7, cursor: 'not-allowed' }}
           />
         </div>
-        <button type="submit" className="gradient-btn">Update Profile</button>
+        <button type="submit" className="gradient-btn" disabled={loading}>
+          {loading ? 'Updating...' : 'Update Profile'}
+        </button>
       </form>
     </div>
   );

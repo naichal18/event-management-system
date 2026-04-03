@@ -8,7 +8,7 @@ import { mockUsers, mockCategories, mockEvents, mockGallery, mockContacts, mockA
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
   
   // Extract path to figure out "activeRoute" for Sidebar highlighting
@@ -20,7 +20,12 @@ const AdminDashboard = () => {
   const [events, setEvents] = useState(mockEvents);
   const [gallery, setGallery] = useState(mockGallery);
   const [contacts] = useState(mockContacts); 
-  const [profile, setProfile] = useState(mockAdminProfile);
+  const [profile, setProfile] = useState(user || mockAdminProfile);
+
+  // Sync profile when user updates globally (e.g. from Profile page)
+  React.useEffect(() => {
+    if (user) setProfile(user);
+  }, [user]);
 
   // We wrap all subpages inside an Outlet when using React Router
   // We'll pass the state via React Router's context feature 

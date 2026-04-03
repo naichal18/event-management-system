@@ -104,14 +104,13 @@ const UserLayout = () => {
                 .dropdown-item {
                     display: block;
                     width: 100%;
-                    padding: '10px 20px';
                     background: none;
                     border: none;
-                    color: '#cbd5e1';
+                    color: #cbd5e1;
                     text-align: left;
-                    font-size: '14px';
+                    font-size: 14px;
                     cursor: pointer;
-                    transition: 'all 0.3s ease';
+                    transition: all 0.3s ease;
                     padding: 10px 20px;
                 }
                 .dropdown-item:hover {
