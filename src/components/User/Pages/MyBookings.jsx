@@ -9,7 +9,7 @@ const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = 'http://localhost:5001/api';
+  const API_BASE = 'https://event-management-system-5wx4.onrender.com/api';
 
   useEffect(() => {
     if (token) fetchBookings();

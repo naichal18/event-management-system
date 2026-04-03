@@ -20,7 +20,7 @@ const EventDetails = () => {
 
   const fetchEvent = async () => {
     try {
-      const res = await fetch(`http://localhost:5001/api/events/${id}`);
+      const res = await fetch(`https://event-management-system-5wx4.onrender.com/api/events/${id}`);
       if (res.ok) {
         const data = await res.json();
         setEvent(data);
@@ -41,7 +41,7 @@ const EventDetails = () => {
     setBookingLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5001/api/bookings', {
+      const res = await fetch('https://event-management-system-5wx4.onrender.com/api/bookings', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

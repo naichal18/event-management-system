@@ -12,7 +12,7 @@ const Home = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/events');
+      const res = await fetch('https://event-management-system-5wx4.onrender.com/api/events');
       if (res.ok) {
         const data = await res.json();
         setEvents(data.slice(0, 3)); // Show top 3 on dashboard
