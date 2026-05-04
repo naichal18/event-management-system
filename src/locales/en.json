@@ -1,0 +1,407 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "events": "Events",
+    "create_event": "Create Event",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "admin": "Admin",
+    "account": "Account",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "auth": {
+    "login_title": "LOGIN",
+    "register_title": "REGISTER",
+    "email_label": "Email",
+    "email_placeholder": "Enter your email",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password",
+    "name_label": "Full Name",
+    "name_placeholder": "Enter your name",
+    "role_label": "Login As",
+    "login_btn": "Log in",
+    "register_btn": "Register",
+    "processing": "Processing...",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?"
+  },
+  "events": {
+    "title": "Upcoming Events",
+    "subtitle": "Secure your tickets for the most anticipated events across the country",
+    "search_placeholder": "Search by title, team, or venue...",
+    "loading": "Discovering events...",
+    "no_events": "No Events Found",
+    "clear_filters": "Clear all filters",
+    "view_details": "View Details",
+    "location": "Location",
+    "date": "Date",
+    "category": "Category"
+  },
+  "create_event": {
+    "title": "AI Event Planner",
+    "subtitle": "Our AI will help you plan the perfect event based on your budget",
+    "form": {
+      "event_title": "Event Title *",
+      "title_placeholder": "Enter a catchy title",
+      "event_type": "Event Type *",
+      "select_type": "Select Type",
+      "location": "Location *",
+      "location_placeholder": "e.g. Mumbai, Hotel",
+      "budget": "Budget (₹) *",
+      "budget_placeholder": "Total Budget",
+      "attendees": "Attendees *",
+      "attendees_placeholder": "No. of Guests",
+      "date": "Date *",
+      "time": "Time",
+      "image": "Event Image",
+      "description": "Description",
+      "description_placeholder": "Any specific requirements?",
+      "ai_btn": "✨ Get AI Suggestions",
+      "ai_loading": "AI Planning...",
+      "submit_btn": "Confirm & Submit",
+      "submit_loading": "Submitting..."
+    },
+    "ai_plan": {
+      "title": "✨ AI Suggested Plan",
+      "theme": "Theme Idea",
+      "food": "Food Suggestions",
+      "music": "Music & Entertainment",
+      "budget": "Budget Breakdown"
+    }
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "pending_approvals": "Pending Approvals",
+    "all_events": "All Events",
+    "user_list": "User List",
+    "post_event": "Post New Event",
+    "add_gallery": "Add to Gallery",
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "delete": "Delete",
+      "view": "View"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    }
+  },
+  "common": {
+    "success": "Success",
+    "error": "Error",
+    "loading": "Loading...",
+    "welcome": "Welcome back",
+    "confirm": "Confirm",
+    "view_all": "View All Events →"
+  },
+  "home_page": {
+    "hero_title_1": "Experience The ",
+    "hero_title_highlight": "Magic",
+    "hero_title_2": " Of Events",
+    "hero_subtitle": "From electrifying cricket matches to vibrant festivals, we bring you the most exclusive and unforgettable experiences across India.",
+    "explore_btn": "Explore Events",
+    "story_btn": "Our Story",
+    "highlights_title": "Upcoming ",
+    "highlights_highlight": "Highlights",
+    "highlights_subtitle": "Handpicked experiences you shouldn't miss",
+    "loading_highlights": "Loading highlights...",
+    "stats": {
+      "total_events": "Total Events",
+      "happy_customers": "Happy Customers",
+      "cities_covered": "Cities Covered",
+      "global_artists": "Global Artists"
+    }
+  },
+  "event_card": {
+    "limited_seats": "Limited Seats",
+    "view_details": "View Details"
+  },
+  "about_page": {
+    "banner_subtitle": "ALL YOU NEED TO KNOW",
+    "banner_title": "ABOUT HARMONI",
+    "breadcrumb": "Home | About Us",
+    "mission_title": "No.1 Events Management",
+    "our_mission": "Our Mission",
+    "mission_text": "To seamlessly execute events that spark joy, foster connection, and create unforgettable memories for thousands. We strive to pioneer the ultimate cross-platform ecosystem where planners, vendors, and clients converge in perfect harmony.",
+    "our_vision": "Our Vision",
+    "vision_text": "Becoming the world's most trusted and automated event management network. We envision a future where complex gatherings, from massive festivals to intimate weddings, can be manifested directly through advanced digital infrastructure.",
+    "why_choose_us": "Why Choose Harmoni?",
+    "features": {
+      "team_title": "Professional Team",
+      "team_text": "Our team consists of highly skilled planners and designers.",
+      "ideas_title": "Creative Ideas",
+      "ideas_text": "We bring innovative and unique concepts to every event.",
+      "support_title": "24/7 Support",
+      "support_text": "We are always available to assist you anytime.",
+      "trusted_title": "Trusted by Clients",
+      "trusted_text": "Thousands of happy clients trust our services."
+    },
+    "services_title": "Our Services",
+    "services": {
+      "wedding": "Wedding Planning",
+      "wedding_desc": "Full-service execution for your dream wedding.",
+      "corporate": "Corporate Events",
+      "corporate_desc": "Professional conferences, galas, and keynotes.",
+      "birthday": "Birthday Parties",
+      "birthday_desc": "Memorable milestones spanning all ages.",
+      "concert": "Concert Management",
+      "concert_desc": "Large scale stages and technical operations.",
+      "catering": "Catering Services",
+      "catering_desc": "Premium menus curated for heavy volumes.",
+      "venue": "Venue Decoration",
+      "venue_desc": "Transforming empty halls into visual spectacles."
+    },
+    "meet_team": "Meet Our Team",
+    "team_roles": {
+      "manager": "Event Manager",
+      "designer": "Lead Designer",
+      "coordinator": "Network Coordinator"
+    },
+    "achievements": "Our Achievements",
+    "stats_labels": {
+      "events": "Events Completed",
+      "clients": "Happy Clients",
+      "team": "Professional Team",
+      "experience": "Years Experience"
+    },
+    "testimonials_title": "What Our Clients Say",
+    "cta_title": "Ready to Plan Your Next Event?",
+    "contact_btn": "Contact Us"
+  },
+  "events_page": {
+    "title": "Upcoming ",
+    "highlight": "Events",
+    "subtitle": "Secure your tickets for the most anticipated events across the country",
+    "search_placeholder": "Search by title, team, or venue...",
+    "discovering": "Discovering events...",
+    "no_events": "No Events Found",
+    "no_events_desc": "We couldn't find any events matching \"{{query}}\" in {{category}}.",
+    "clear_filters": "Clear all filters",
+    "categories": {
+      "all": "All",
+      "cricket": "Cricket",
+      "concert": "Concert",
+      "workshop": "Workshop",
+      "festival": "Festival",
+      "wedding": "Wedding",
+      "birthday": "Birthday",
+      "corporate": "Corporate"
+    }
+  },
+  "contact_page": {
+    "banner_title": "CONTACT US NOW",
+    "banner_subtitle": "KEEP IN TOUCH",
+    "breadcrumb": "Home | Contact Us",
+    "form_title": "Send Us a Message",
+    "form_subtitle": "Fill out the form below and our team will get back to you.",
+    "success_msg": "Message sent successfully! We will contact you shortly.",
+    "name_label": "Full Name",
+    "name_placeholder": "Enter your full name",
+    "email_label": "Email Address",
+    "email_placeholder": "your@email.com",
+    "phone_label": "Phone Number",
+    "phone_placeholder": "10-digit mobile number",
+    "message_label": "Message",
+    "message_placeholder": "Write your message here...",
+    "send_btn": "Send Message",
+    "get_in_touch": "Get in Touch",
+    "touch_desc": "We are always happy to hear from you! Whether it's a business inquiry, booking request, or just a message — we'll respond promptly.",
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "location": "Location",
+      "hours": "Working Hours",
+      "hours_val": "Mon–Sat, 9:00 AM – 7:00 PM"
+    },
+    "errors": {
+      "name": "Name is required.",
+      "email": "Email is required.",
+      "email_invalid": "Please enter a valid email address.",
+      "phone": "Phone is required.",
+      "phone_invalid": "Phone must be exactly 10 digits.",
+      "message": "Message is required."
+    }
+  },
+  "account_page": {
+    "title": "Account Details",
+    "name_label": "Full Name",
+    "email_label": "Email ID",
+    "gender_label": "Gender",
+    "select_gender": "Select Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "phone_label": "Phone Number",
+    "phone_placeholder": "Enter your phone number",
+    "update_btn": "Update Profile",
+    "updating": "Updating...",
+    "success": "Profile updated successfully!",
+    "phone_error": "Please enter a valid 10-digit phone number",
+    "gender_error": "Please select your gender"
+  },
+  "gallery_page": {
+    "title": "Event Gallery",
+    "subtitle": "A showcase of memorable moments curated by Harmoni",
+    "loading": "Loading gallery...",
+    "no_images": "No gallery images yet. Admin can add images from the dashboard.",
+    "timeline": "Timeline"
+  },
+  "admin_sidebar": {
+    "header": "ADMIN",
+    "user_list": "User List",
+    "pending_events": "Pending Approvals",
+    "event_post": "Event Post",
+    "post_category": "Post Category",
+    "add_gallery": "Add Gallery",
+    "contact_list": "Contact List",
+    "profile": "Profile",
+    "change_password": "Change Password",
+    "logout": "Logout"
+  },
+  "admin_topbar": {
+    "dashboard_overview": "Dashboard Overview",
+    "notifications": "Notifications",
+    "no_notifications": "No new notifications",
+    "admin_badge": "ADMIN",
+    "admin_role": "Event Management Admin",
+    "my_profile": "My Profile",
+    "change_password": "Change Password",
+    "logout": "Logout"
+  },
+  "pending_events": {
+    "title": "Pending Approvals",
+    "subtitle": "Review and approve user-submitted events",
+    "loading": "Loading pending events...",
+    "no_events": "No pending events for approval.",
+    "table": {
+      "no": "No",
+      "details": "Event Details",
+      "ai_plan": "AI Plan",
+      "budget": "Budget",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "approving": "Approving...",
+      "rejecting": "Rejecting..."
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "ai_labels": {
+      "theme": "Theme",
+      "music": "Music"
+    },
+    "alerts": {
+      "approved": "Event approved successfully!",
+      "rejected": "Event rejected successfully!",
+      "fail": "Failed to {{action}} event"
+    }
+  },
+  "event_post": {
+    "title": "Post New Event",
+    "all_events": "All Events",
+    "loading": "Loading events...",
+    "no_events": "No events found. Post one above!",
+    "form": {
+      "image": "Choose Event Image",
+      "title": "Event Title",
+      "date": "Date",
+      "price": "Price (₹)",
+      "time": "Time",
+      "category": "Category",
+      "select_category": "Select Category",
+      "location": "Location",
+      "description": "Description",
+      "post_btn": "Post Event",
+      "posting": "Posting..."
+    },
+    "table": {
+      "no": "No",
+      "image": "Image",
+      "title": "Title",
+      "category": "Category",
+      "date": "Date",
+      "location": "Location",
+      "status": "Status",
+      "action": "Action"
+    },
+    "actions": {
+      "delete": "Delete",
+      "confirm_delete": "Are you sure you want to delete this event?"
+    },
+    "alerts": {
+      "success": "Event posted successfully!",
+      "fail": "Failed to post event",
+      "delete_success": "Event deleted successfully!",
+      "delete_fail": "Failed to delete event",
+      "server_error": "Server error"
+    }
+  },
+  "user_list": {
+    "title": "User List",
+    "refresh": "Refresh",
+    "no_users": "No users found.",
+    "table": {
+      "no": "No",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "gender": "Gender",
+      "phone": "Phone"
+    },
+    "roles": {
+      "admin": "Admin",
+      "user": "User"
+    }
+  },
+  "contact_list": {
+    "title": "Contact Messages",
+    "refresh": "Refresh",
+    "no_messages": "No messages yet.",
+    "table": {
+      "no": "No",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "timestamp": "Timestamp"
+    }
+  },
+  "post_category": {
+    "add_title": "Add Category",
+    "list_title": "Category List",
+    "no_categories": "No categories found.",
+    "form": {
+      "name": "Category Name",
+      "description": "Description",
+      "add_btn": "Add",
+      "adding": "Adding..."
+    },
+    "table": {
+      "no": "No",
+      "name": "Name",
+      "description": "Description",
+      "action": "Action"
+    },
+    "actions": {
+      "delete": "Delete",
+      "confirm_delete": "Delete this category?"
+    },
+    "alerts": {
+      "success": "Category added successfully!",
+      "fail": "Failed to add category",
+      "delete_fail": "Failed to delete category",
+      "server_error": "Server error"
+    }
+  }
+}
