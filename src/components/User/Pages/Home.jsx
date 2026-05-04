@@ -14,7 +14,7 @@ const Home = () => {
 
   const fetchEvents = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/events');
+      const res = await fetch('https://event-backend1.onrender.com/api/events');
       if (res.ok) {
         const data = await res.json();
         setEvents(data.slice(0, 3)); // Show top 3 on dashboard
@@ -29,7 +29,7 @@ const Home = () => {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return 'https://via.placeholder.com/600x400?text=Event+Image';
     if (imagePath.startsWith('http')) return imagePath;
-    return `http://localhost:5001${imagePath}`;
+    return `https://event-backend1.onrender.com${imagePath}`;
   };
 
   return (
