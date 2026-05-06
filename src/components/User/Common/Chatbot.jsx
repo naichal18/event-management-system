@@ -69,7 +69,7 @@ const Chatbot = ({ fullPage = false }) => {
 
     const getAIResponse = async (message) => {
         try {
-            const res = await fetch("http://localhost:5001/api/chat/chat", {
+            const res = await fetch("https://event-backend1.onrender.com/api/chat/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

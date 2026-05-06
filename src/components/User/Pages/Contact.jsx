@@ -61,7 +61,7 @@ const Contact = () => {
       return;
     }
 
-    const API_BASE = 'http://localhost:5001/api';
+    const API_BASE = 'https://event-backend1.onrender.com/api';
     
     fetch(`${API_BASE}/messages`, { 
       method: "POST",
