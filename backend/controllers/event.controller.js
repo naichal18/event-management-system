@@ -68,6 +68,10 @@ const createEvent = async (req, res) => {
             return res.status(400).json({ message: 'Title, Category, Location, and Date are required' });
         }
 
+        // Auto-approve events created by admin; user events go through review
+        const isAdmin = req.user && req.user.role === 'Admin';
+        const eventStatus = isAdmin ? 'approved' : 'pending';
+
         const event = new Event({
             title,
             image: req.file ? `/uploads/admin/${req.file.filename}` : (req.body.image || 'https://images.unsplash.com/photo-1459749411177-042180ce673c?auto=format&fit=crop&w=800&q=80'),
@@ -79,11 +83,11 @@ const createEvent = async (req, res) => {
             price: price || 0,
             attendees: attendees || 0,
             ai_suggestions: typeof ai_suggestions === 'string' ? JSON.parse(ai_suggestions) : ai_suggestions,
-            status: 'pending' // Users can only create pending events
+            status: eventStatus
         });
 
         const createdEvent = await event.save();
-        console.log('Backend: Event successfully created with ID:', createdEvent._id);
+        console.log(`Backend: Event created with status "${eventStatus}" by ${req.user?.role || 'Unknown'} (ID: ${createdEvent._id})`);
         res.status(201).json(createdEvent);
     } catch (error) {
         console.error('Backend: Error Creating Event:', error);

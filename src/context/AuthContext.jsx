@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = 'https://event-backend1.onrender.com/api';
+  const API_BASE = 'http://localhost:5001/api';
 
   useEffect(() => {
     if (token) {

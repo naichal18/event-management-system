@@ -30,31 +30,46 @@ const Chatbot = ({ fullPage = false }) => {
         const msg = message.toLowerCase();
         
         if (msg.includes("create event") || msg.includes("make event")) {
-            return "To create an event, navigate to the 'Create Event' page from the navbar. Fill in the title, type, location, and budget, then let our AI help you with the rest!";
+            return "🎉 Creating an event is easy!\n\n" +
+                   "• Navigate to the 'Create Event' page\n" +
+                   "• Fill in the basic details (Title, Type, Location)\n" +
+                   "• Set your budget\n" +
+                   "• Let our AI refine the plan for you!";
         }
         
         if (msg.includes("budget") || msg.includes("cost") || msg.includes("price")) {
-            return "Your event budget depends on the number of guests and the type of event. Our AI Event Planner can provide a detailed breakdown once you enter your total budget!";
+            return "💰 Budget Planning:\n\n" +
+                   "• Budgets depend on guest count and event type\n" +
+                   "• We suggest allocating 40% for Catering\n" +
+                   "• Allocate 20% for the Venue\n" +
+                   "• Our AI Planner can provide a full breakdown!";
         }
         
         if (msg.includes("theme") || msg.includes("ideas") || msg.includes("suggestion")) {
-            return "Popular themes include 'Royal Gold & White' for weddings, 'Neon Glow' for birthdays, and 'Corporate Chic' for business events. I can suggest more if you tell me your event type!";
+            return "🎨 Theme Suggestions:\n\n" +
+                   "• 💍 Wedding: 'Royal Gold' or 'Floral Garden'\n" +
+                   "• 🎂 Birthday: 'Neon Glow' or 'Vintage Retro'\n" +
+                   "• 💼 Corporate: 'Modern Chic' or 'Tech Future'";
         }
-
+    
         if (msg.includes("gallery") || msg.includes("photo")) {
-            return "You can check out our past successful events in the Gallery section to get inspired!";
+            return "🖼 Inspiration:\n\n" +
+                   "• Check out our 'Gallery' for past events\n" +
+                   "• See real-world setups and decor ideas";
         }
-
+    
         if (msg.includes("contact") || msg.includes("help") || msg.includes("support")) {
-            return "You can reach our support team through the Contact page or email us at support@harmoni.com.";
+            return "📞 Support:\n\n" +
+                   "• Email: support@harmoni.com\n" +
+                   "• Use our 'Contact' page for inquiries";
         }
-
-        return "I'm here to help with your event planning! You can ask me about creating events, budget tips, or theme suggestions.";
+    
+        return "👋 I'm here to help!\n\nYou can ask me about:\n• Creating events\n• Budget suggestions\n• Theme ideas";
     };
 
     const getAIResponse = async (message) => {
         try {
-            const res = await fetch("https://event-backend1.onrender.com/api/chat/chat", {
+            const res = await fetch("http://localhost:5001/api/chat/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
