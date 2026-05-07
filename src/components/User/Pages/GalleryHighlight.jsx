@@ -22,11 +22,10 @@ const GalleryHighlight = () => {
   };
 
   useEffect(() => {
-    fetch(`${API_BASE}/gallery`)
-      .then(res => res.json())
+    fetch(`${API_BASE}/gallery/${id}`)
+      .then(res => res.ok ? res.json() : null)
       .then(data => {
-        const found = data.find(g => g._id === id);
-        setItem(found);
+        setItem(data);
       })
       .catch(err => console.error(err))
       .finally(() => setLoading(false));

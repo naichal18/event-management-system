@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getGalleryItems, createGalleryItem, deleteGalleryItem } = require('../controllers/gallery.controller');
+const { getGalleryItems, getGalleryItemById, createGalleryItem, deleteGalleryItem } = require('../controllers/gallery.controller');
 const { protect, admin } = require('../middleware/auth');
 const multer = require('multer');
 const path = require('path');
@@ -40,6 +40,7 @@ const upload = multer({
 });
 
 router.get('/', getGalleryItems);
+router.get('/:id', getGalleryItemById);
 router.post('/', protect, admin, upload.single('image'), createGalleryItem);
 router.delete('/:id', protect, admin, deleteGalleryItem);
 

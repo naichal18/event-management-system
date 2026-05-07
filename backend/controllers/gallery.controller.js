@@ -9,6 +9,19 @@ const getGalleryItems = async (req, res) => {
     }
 };
 
+const getGalleryItemById = async (req, res) => {
+    try {
+        const item = await Gallery.findById(req.params.id);
+        if (item) {
+            res.json(item);
+        } else {
+            res.status(404).json({ message: 'Gallery item not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 const createGalleryItem = async (req, res) => {
     try {
         const { title, description, timeline, location, date, highlights, images, organizedBy, eventType, guestCount, organizerNotes, atmosphere } = req.body;
@@ -53,4 +66,4 @@ const deleteGalleryItem = async (req, res) => {
     }
 };
 
-module.exports = { getGalleryItems, createGalleryItem, deleteGalleryItem };
+module.exports = { getGalleryItems, getGalleryItemById, createGalleryItem, deleteGalleryItem };
