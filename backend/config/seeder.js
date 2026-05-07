@@ -57,7 +57,35 @@ const defaultEvents = [
     category: 'Cultural',
     description: 'Annual college fest featuring coding competitions, workshops, and guest lectures.',
     status: 'approved'
-  }
+  },
+  {
+    title: 'INDIAN PREMIER LEAGUE',
+    price: 2499,
+    date: '2025-05-15',
+    time: '7:30 PM',
+    location: 'Wankhede Stadium, Mumbai',
+    image: 'https://onecricketnews.akamaized.net/parth-editor/oc-dashboard/news-images-prod/1709033614977_ipl2024.jpeg?type=mq',
+    category: 'Cricket'
+  },
+  {
+    title: 'WOMEN PREMIER LEAGUE',
+    price: 599,
+    date: '2025-04-20',
+    time: '5:00 PM',
+    location: 'M. Chinnaswamy Stadium, Bengaluru',
+    image: 'https://images.indianexpress.com/2023/03/WPL-2-1.jpg?w=1200',
+    category: 'Cricket'
+  },
+  {
+    title: 'GOKULDHAM PREMIER LEAGUE',
+    price: 200,
+    date: '2025-06-01',
+    time: '10:00 AM',
+    location: 'Gokuldham Society Ground, Goregaon',
+    image: 'https://images.unsplash.com/photo-1562077772-3bd90403f7f0?auto=format&fit=crop&w=800&q=80',
+    category: 'Cricket'
+  },
+
 ];
 
 const defaultUsers = [
