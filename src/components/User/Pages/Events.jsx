@@ -121,9 +121,17 @@ const Events = () => {
                                             src={getImageUrl(event.image)} 
                                             alt={event.title} 
                                             style={{ width: '100%', height: '220px', objectFit: 'cover' }} 
+                                            loading="lazy"
                                             onError={(e) => {
                                                 e.target.onerror = null; 
-                                                e.target.src = 'https://images.unsplash.com/photo-1459749411177-042180ce673c?auto=format&fit=crop&w=800&q=80';
+                                                const catFallbacks = {
+                                                    Cricket: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da',
+                                                    Concert: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30',
+                                                    Festival: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae',
+                                                    Corporate: 'https://images.unsplash.com/photo-1511578314322-379afb476865',
+                                                    Sports: 'https://images.unsplash.com/photo-1551958219-acbc608c6377'
+                                                };
+                                                e.target.src = catFallbacks[event.category] || 'https://images.unsplash.com/photo-1459749411177-042180ce673c?auto=format&fit=crop&w=800&q=80';
                                             }}
                                         />
                                         <span style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', color: '#0df', padding: '5px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 700, border: '1px solid rgba(0,255,255,0.3)' }}>

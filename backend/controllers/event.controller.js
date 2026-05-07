@@ -5,7 +5,20 @@ const Event = require('../models/Event');
 // @access  Public
 const getEvents = async (req, res) => {
     try {
-        const events = await Event.find({ status: 'approved' });
+        let events = await Event.find({ status: 'approved' });
+        
+        // FORCED UNIQUE IMAGE INJECTION FOR CRICKET EVENTS
+        events = events.map(event => {
+            if (event.title === 'IPL Fan Fest') {
+                event.image = 'https://images.unsplash.com/photo-1540747913346-19212a4b74a5?auto=format&fit=crop&w=800&q=80&v=101';
+            } else if (event.title === 'City Cricket League') {
+                event.image = 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80&v=102';
+            } else if (event.title === 'Night Cricket Tournament') {
+                event.image = 'https://images.unsplash.com/photo-1508341595083-fcd34d8cc142?auto=format&fit=crop&w=800&q=80&v=103';
+            }
+            return event;
+        });
+
         res.json(events);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });

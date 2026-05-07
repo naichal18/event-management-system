@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../context/AuthContext';
 
 const FALLBACK = 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80';
 
 const Gallery = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { API_BASE } = useAuth();
   const SERVER_URL = API_BASE.replace('/api', '');

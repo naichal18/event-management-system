@@ -57,7 +57,8 @@ const gallerySchema = new mongoose.Schema({
         {
             time: String,
             activity: String,
-            description: String
+            description: String,
+            imageUrl: String
         }
     ],
     timestamp: {
