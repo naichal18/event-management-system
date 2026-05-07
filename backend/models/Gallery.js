@@ -25,9 +25,29 @@ const gallerySchema = new mongoose.Schema({
         required: true,
         default: 'Past Date'
     },
-    description: { // The "Event Story"
+    description: { // Short summary
         type: String,
         required: true
+    },
+    organizedBy: {
+        type: String,
+        default: 'Harmoni Events'
+    },
+    eventType: {
+        type: String,
+        default: 'Public'
+    },
+    guestCount: {
+        type: String,
+        default: '100+'
+    },
+    organizerNotes: {
+        type: String,
+        default: ''
+    },
+    atmosphere: {
+        type: String,
+        default: 'Energetic'
     },
     highlights: {
         type: [String],
@@ -36,7 +56,8 @@ const gallerySchema = new mongoose.Schema({
     timeline: [
         {
             time: String,
-            activity: String
+            activity: String,
+            description: String
         }
     ],
     timestamp: {

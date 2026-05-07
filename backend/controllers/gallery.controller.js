@@ -11,7 +11,7 @@ const getGalleryItems = async (req, res) => {
 
 const createGalleryItem = async (req, res) => {
     try {
-        const { title, description, timeline, location, date, highlights, images } = req.body;
+        const { title, description, timeline, location, date, highlights, images, organizedBy, eventType, guestCount, organizerNotes, atmosphere } = req.body;
         const imageUrl = req.file ? `/uploads/admin/${req.file.filename}` : req.body.imageUrl;
         
         if (!imageUrl || !title || !description) {
@@ -24,6 +24,11 @@ const createGalleryItem = async (req, res) => {
             description, 
             location: location || 'Venue',
             date: date || 'Past Date',
+            organizedBy: organizedBy || 'Harmoni Events',
+            eventType: eventType || 'Public',
+            guestCount: guestCount || '100+',
+            organizerNotes: organizerNotes || '',
+            atmosphere: atmosphere || 'Energetic',
             highlights: typeof highlights === 'string' ? JSON.parse(highlights) : (highlights || []),
             images: typeof images === 'string' ? JSON.parse(images) : (images || []),
             timeline: typeof timeline === 'string' ? JSON.parse(timeline) : (timeline || []) 
