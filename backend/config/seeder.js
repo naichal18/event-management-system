@@ -66,6 +66,8 @@ const defaultEvents = [
     location: 'Wankhede Stadium, Mumbai',
     image: 'https://onecricketnews.akamaized.net/parth-editor/oc-dashboard/news-images-prod/1709033614977_ipl2024.jpeg?type=mq',
     category: 'Cricket'
+    description: 'Join an exciting cricket event featuring competitive teams, energetic crowds, live commentary, and thrilling matches.'
+    status: 'approved'
   },
   {
     title: 'WOMEN PREMIER LEAGUE',
