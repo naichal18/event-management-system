@@ -358,14 +358,11 @@ const autoSeed = async () => {
   try {
     console.log('Checking database state...');
 
-    // Only seed users if none exist
-    const userCount = await User.countDocuments();
-    if (userCount === 0) {
-      await User.create(defaultUsers);
-      console.log('✅ Default users seeded (Admin & Test User)');
-    } else {
-      console.log(`ℹ️  Users already exist (${userCount} found) — skipping user seed`);
-    }
+    // Force refresh users to ensure default credentials work
+    console.log('Refreshing user data...');
+    await User.deleteMany({});
+    await User.create(defaultUsers);
+    console.log('✅ Default users seeded (Admin & Test User)');
 
     // Seed categories
     const categoryCount = await Category.countDocuments();
