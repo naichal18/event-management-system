@@ -1,6 +1,68 @@
 const Event = require('../models/Event');
 const User = require('../models/User');
 const Category = require('../models/Category');
+const Gallery = require('../models/Gallery');
+
+const defaultGallery = [
+  {
+    title: 'Navratri Celebration 2026',
+    location: 'GMDC Ground, Ahmedabad',
+    date: '12 March 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1590059530519-0775d71c1809?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1514525253361-bee1a31f440a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'A vibrant evening of Garba and Dandiya with over 5000 attendees. The event celebrated the spirit of Navratri with traditional music, modern DJ beats, and authentic Gujarati food stalls.',
+    highlights: ['Award-winning DJ performance', 'Traditional Garba Competition', 'Celebrity Guest Appearance', 'Authentic Food Festival'],
+    timeline: [
+      { time: '5:00 PM', activity: 'Guest Entry & Welcome' },
+      { time: '6:30 PM', activity: 'Aarti & Welcome Ceremony' },
+      { time: '7:30 PM', activity: 'Traditional Garba Sessions' },
+      { time: '9:00 PM', activity: 'Dinner & Refreshments' },
+      { time: '10:00 PM', activity: 'Fusion DJ & Modern Dance' }
+    ]
+  },
+  {
+    title: 'Sunburn Holi Reloaded',
+    location: 'Vagator, Goa',
+    date: '25 April 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1590059530519-0775d71c1809?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'The ultimate Holi music festival featuring top international DJs and eco-friendly organic colors. A high-energy experience at the heart of Vagator beach.',
+    highlights: ['Top 10 International DJs', 'Organic Color Cannons', 'Pool Side Dance Floor', 'Beach Front Bar'],
+    timeline: [
+      { time: '10:00 AM', activity: 'Entry & Color Distribution' },
+      { time: '11:00 AM', activity: 'Opening DJ Set' },
+      { time: '1:00 PM', activity: 'Main Stage Headliner' },
+      { time: '3:00 PM', activity: 'Pool Party & Color Rain' },
+      { time: '5:00 PM', activity: 'Sunset Closing Set' }
+    ]
+  },
+  {
+    title: 'Corporate Innovation Summit',
+    location: 'Leela Palace, Bangalore',
+    date: '05 May 2026',
+    imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80'
+    ],
+    description: 'A high-profile corporate summit bringing together industry leaders to discuss the future of technology and AI. Featured 20+ keynote speakers and interactive workshops.',
+    highlights: ['Keynote by Tech Giants', 'Networking Gala Dinner', 'Startup Pitch Arena', 'Future-Tech Expo'],
+    timeline: [
+      { time: '9:00 AM', activity: 'Registration & Coffee' },
+      { time: '10:00 AM', activity: 'Inaugural Keynote' },
+      { time: '1:00 PM', activity: 'Networking Lunch' },
+      { time: '3:00 PM', activity: 'Panel Discussions' },
+      { time: '7:00 PM', activity: 'Cocktail & Awards Dinner' }
+    ]
+  }
+];
 
 const defaultEvents = [
   {
@@ -378,6 +440,12 @@ const autoSeed = async () => {
     await Event.deleteMany({});
     await Event.insertMany(defaultEvents);
     console.log(`✅ Default events seeded (${defaultEvents.length} items)`);
+
+    // Force seed gallery history
+    console.log('Refreshing gallery history...');
+    await Gallery.deleteMany({});
+    await Gallery.insertMany(defaultGallery);
+    console.log(`✅ Gallery history seeded (${defaultGallery.length} items)`);
 
     console.log('✅ Database ready!');
   } catch (error) {

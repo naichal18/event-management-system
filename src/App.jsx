@@ -86,7 +86,7 @@ function App() {
                 <Route path="event/:id" element={<EventDetails />} />
                 <Route path="create-event" element={<CreateEvent />} />
                 <Route path="gallery" element={<Gallery />} />
-                <Route path="gallery/:eventName" element={<GalleryHighlight />} />
+                <Route path="gallery/:id" element={<GalleryHighlight />} />
                 <Route path="contact" element={<Contact />} />
                 <Route path="account" element={<Account />} />
                 <Route path="change-password" element={<UserChangePassword />} />

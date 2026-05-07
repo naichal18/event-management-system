@@ -11,17 +11,21 @@ const getGalleryItems = async (req, res) => {
 
 const createGalleryItem = async (req, res) => {
     try {
-        const { title, description, timeline } = req.body;
+        const { title, description, timeline, location, date, highlights, images } = req.body;
         const imageUrl = req.file ? `/uploads/admin/${req.file.filename}` : req.body.imageUrl;
         
         if (!imageUrl || !title || !description) {
-            return res.status(400).json({ message: 'Please provide all fields (including image)' });
+            return res.status(400).json({ message: 'Please provide all fields (including cover image)' });
         }
 
         const item = await Gallery.create({ 
             imageUrl, 
             title, 
             description, 
+            location: location || 'Venue',
+            date: date || 'Past Date',
+            highlights: typeof highlights === 'string' ? JSON.parse(highlights) : (highlights || []),
+            images: typeof images === 'string' ? JSON.parse(images) : (images || []),
             timeline: typeof timeline === 'string' ? JSON.parse(timeline) : (timeline || []) 
         });
         res.status(201).json(item);

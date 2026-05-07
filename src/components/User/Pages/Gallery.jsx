@@ -45,71 +45,90 @@ const Gallery = () => {
       ) : (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '30px',
-          maxWidth: '1200px',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+          gap: '40px',
+          maxWidth: '1300px',
           margin: '0 auto'
         }}>
           {items.map((item) => (
             <div
               key={item._id}
+              onClick={() => navigate(`/user/gallery/${item._id}`)}
               style={{
-                cursor: 'default',
-                borderRadius: '16px',
+                cursor: 'pointer',
+                borderRadius: '24px',
                 overflow: 'hidden',
                 position: 'relative',
+                background: 'rgba(15, 23, 42, 0.6)',
+                backdropFilter: 'blur(10px)',
                 border: '1px solid rgba(255,255,255,0.08)',
-                transition: 'all 0.35s ease',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+                height: '420px'
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.transform = 'scale(1.04)';
-                e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,200,255,0.3)';
-                e.currentTarget.style.borderColor = 'rgba(0,200,255,0.5)';
+                e.currentTarget.style.transform = 'translateY(-10px)';
+                e.currentTarget.style.boxShadow = '0 25px 50px rgba(0,210,255,0.2)';
+                e.currentTarget.style.borderColor = 'rgba(0,210,255,0.4)';
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.4)';
                 e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
               }}
             >
-              <img
-                src={getImageUrl(item.imageUrl)}
-                alt={item.title}
-                onError={(e) => { e.target.onerror = null; e.target.src = FALLBACK; }}
-                style={{ width: '100%', height: '250px', objectFit: 'cover', display: 'block' }}
-              />
+              {/* Image Container */}
+              <div style={{ height: '260px', overflow: 'hidden', position: 'relative' }}>
+                <img
+                  src={getImageUrl(item.imageUrl)}
+                  alt={item.title}
+                  onError={(e) => { e.target.onerror = null; e.target.src = FALLBACK; }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                  className="gallery-card-img"
+                />
+                <div style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  background: 'rgba(0,0,0,0.6)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '6px 14px',
+                  borderRadius: '20px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  color: '#0df',
+                  border: '1px solid rgba(0,255,255,0.3)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  COMPLETED
+                </div>
+              </div>
 
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(to top, rgba(11,17,32,0.95) 0%, rgba(11,17,32,0.2) 60%, transparent 100%)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                padding: '20px'
-              }}>
-                <h3 style={{ color: '#fff', fontWeight: 700, fontSize: '1.2rem', marginBottom: '4px', letterSpacing: '0.5px' }}>
-                  {item.title}
-                </h3>
-                <p style={{ color: '#cbd5e1', fontSize: '12px', marginBottom: '8px', lineHeight: '1.4' }}>{item.description}</p>
-                
-                {item.timeline && item.timeline.length > 0 && (
-                  <div style={{ marginBottom: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '8px' }}>
-                    <p style={{ color: '#0df', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '5px' }}>🕒 {t('gallery_page.timeline')}</p>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: '11px', color: '#94a3b8' }}>
-                      {item.timeline.map((step, idx) => (
-                        <li key={idx} style={{ marginBottom: '2px' }}>
-                          • <span style={{ color: '#fff', fontWeight: 600 }}>{step.time}</span> – {step.activity}
-                        </li>
-                      ))}
-                    </ul>
+              {/* Content Container */}
+              <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', height: '160px', justifyContent: 'space-between' }}>
+                <div>
+                  <h3 style={{ color: '#fff', fontWeight: 800, fontSize: '1.4rem', marginBottom: '8px', lineHeight: '1.2' }}>
+                    {item.title}
+                  </h3>
+                  <div style={{ display: 'flex', gap: '15px', color: '#94a3b8', fontSize: '13px', fontWeight: 500 }}>
+                    <span>📍 {item.location}</span>
+                    <span>📅 {item.date}</span>
                   </div>
-                )}
+                </div>
 
-                <p style={{ color: '#64748b', fontSize: '10px', fontWeight: 600, letterSpacing: '1px' }}>
-                  {new Date(item.timestamp).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
-                </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '15px' }}>
+                  <div style={{ display: 'flex', gap: '5px' }}>
+                    {item.highlights && item.highlights.slice(0, 2).map((h, i) => (
+                      <span key={i} style={{ fontSize: '10px', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '4px', color: '#64748b' }}>
+                        #{h.split(' ')[0]}
+                      </span>
+                    ))}
+                  </div>
+                  <span style={{ color: '#0df', fontWeight: 700, fontSize: '12px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    View Story →
+                  </span>
+                </div>
               </div>
             </div>
           ))}
