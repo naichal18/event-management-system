@@ -351,6 +351,7 @@ const defaultCategories = [
   { name: 'Party', description: 'Social parties and celebrations' },
   { name: 'Corporate', description: 'Business and corporate events' },
   { name: 'Sports', description: 'Sporting events and tournaments' },
+  { name: 'Wedding', description: 'Royal weddings and grand celebrations' },
 ];
 
 const autoSeed = async () => {
@@ -366,16 +367,7 @@ const autoSeed = async () => {
       console.log(`ℹ️  Users already exist (${userCount} found) — skipping user seed`);
     }
 
-    // Only seed events if none exist
-    const eventCount = await Event.countDocuments();
-    if (eventCount === 0) {
-      await Event.insertMany(defaultEvents);
-      console.log(`✅ Default events seeded (${defaultEvents.length} items)`);
-    } else {
-      console.log(`ℹ️  Events already exist (${eventCount} found) — skipping event seed`);
-    }
-
-    // Only seed categories if none exist
+    // Seed categories
     const categoryCount = await Category.countDocuments();
     if (categoryCount === 0) {
       await Category.insertMany(defaultCategories);
@@ -383,6 +375,12 @@ const autoSeed = async () => {
     } else {
       console.log(`ℹ️  Categories already exist (${categoryCount} found) — skipping category seed`);
     }
+
+    // Force seed events by clearing them first to ensure new sample data is loaded
+    console.log('Refreshing event data...');
+    await Event.deleteMany({});
+    await Event.insertMany(defaultEvents);
+    console.log(`✅ Default events seeded (${defaultEvents.length} items)`);
 
     console.log('✅ Database ready!');
   } catch (error) {
